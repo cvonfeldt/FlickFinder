@@ -1,0 +1,44 @@
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.swp
+
+# Django-specific files
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+db.sqlite3
+media/
+
+# Local environment variables (don't commit sensitive data like API keys)
+.env
+
+# VSCode settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# Mac OS X file system
+.DS_Store
+
+# Windows image file thumbs.db
+Thumbs.db
+
+# mypy
+.mypy_cache/
+
+# Django migrations
+migrations/
+
+# Static files and media (can be generated or handled separately)
+staticfiles/
+
+# If you're using a virtual environment, ignore it:
+venv/
+env/

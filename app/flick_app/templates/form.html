@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    {% load static %}  <!-- Make sure this is here to load static files -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Form Box (Left Side) -->
+        <div class="form-box">
+            <h1>Enter Your Movie Preferences</h1>
+
+            <form method="post">
+                {% csrf_token %}
+                
+                <!-- User ID Input Field (id-input div) -->
+                <div class="id-input">
+                    <label for="user_id">User ID:</label>
+                    <!-- Render user_id field manually to match the div structure -->
+                    <input type="text" id="user_id" name="user_id" value="{{ user_id }}">
+                </div> 
+                <div class="preferences-input">
+                    <label for="preferences">{{ form.preferences.label }}</label> <!-- Manually render the label -->
+                    {{ form.preferences }} <!-- Render the preferences field -->
+                </div>
+                <button type="submit">Get Recommendations</button>
+            </form>
+        </div>
+
+        <!-- Response Box (Right Side) -->
+        <div class="response-box">
+            {% if recommendations %}
+                <h2>Recommended Movies</h2>
+                <ul>
+                    {% for movie in recommendations %}
+                        <li>
+                            <h3>{{ movie.title }} ({{ movie.release_year }})</h3>
+                            {% if movie.poster %}
+                                <img src="{{ movie.poster }}" alt="Poster of {{ movie.title }}">
+                            {% endif %}
+                            <p><strong>Description:</strong> {{ movie.description }}</p>
+                            <p><strong>Relevance Score:</strong> {{ movie.score }}</p>
+                            <p><strong>Why this movie?</strong> {{ movie.explanation }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No recommendations yet. Please enter your preferences.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
